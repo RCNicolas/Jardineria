@@ -54,7 +54,9 @@ JOIN oficina o ON o.codigo_oficina = e.codigo_oficina
 WHERE p.codigo_cliente is NULL;
 
 --6
-SELECT linea_direccion1 
-FROM oficina o
+SELECT DISTINCT
+  c.nombre_cliente AS NombreCliente, c.ciudad AS Ciudad_Cielnte, o.linea_direccion1 AS Direccion_Oficina
+FROM cliente c
 JOIN empleado e ON c.codigo_empleado_rep_ventas = e.codigo_empleado
 JOIN oficina o ON o.codigo_oficina = e.codigo_oficina
+WHERE c.ciudad = "Fuenlabrada";
