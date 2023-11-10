@@ -201,3 +201,30 @@ SELECT e.codigo_empleado AS CÓDIGO_EMPLEADO ,
 FROM empleado e
   LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
 WHERE c.codigo_empleado_rep_ventas IS NULL;
+
+-----1
+SELECT 
+nombre_cliente AS Nombre,
+limite_credito AS Limite_Credito
+FROM cliente
+WHERE limite_credito = (
+  SELECT MAX(limite_credito )
+  FROM cliente 
+);
+
+-----2
+SELECT 
+nombre AS Nombre,
+precio_venta AS Precio_De_Venta
+FROM producto
+WHERE precio_venta = (
+  SELECT MAX(precio_venta)
+  FROM producto
+);
+
+-----3
+SELECT 
+p.nombre AS Nombre
+FROM producto p
+JOIN detalle_pedipo dp ON p.codigo_productp = dp.codigo_producto
+
