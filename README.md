@@ -503,31 +503,61 @@ AND codigo_empleado_rep_ventas IN (11, 30);
 3. Devuelve el nombre del producto del que se han vendido más unidades. (Tenga en cuenta que tendrá que calcular cuál es el número total de unidades que se han vendido de cada producto a partir de los datos de la tabla `detalle_pedido`)
 
    ```sql
-   
+   SELECT 
+   p.nombre AS Nombre
+   FROM producto p
+   JOIN detalle_pedipo dp ON p.codigo_productp = dp.codigo_producto
+
    ```
 
 4. Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado. (Sin utilizar `INNER JOIN`).
 
    ```sql
-   
+   SELECT *
+   FROM cliente
+   WHERE limite_credito > (
+      SELECT COALESCE(SUM(total), 0)
+      FROM pago
+      WHERE pago.codigo_cliente = cliente.codigo_cliente
+   );
+
    ```
 
 5. Devuelve el producto que más unidades tiene en stock.
 
    ```sql
-   
+   SELECT *
+   FROM producto
+   WHERE cantidad_en_stock = (
+      SELECT MAX(cantidad_en_stock)
+      FROM producto
+   );
+
    ```
 
 6. Devuelve el producto que menos unidades tiene en stock.
 
    ```sql
-   
+   SELECT *
+   FROM producto
+   WHERE cantidad_en_stock = (
+      SELECT MIN(cantidad_en_stock)
+      FROM producto
+   );    
+
    ```
 
 7. Devuelve el nombre, los apellidos y el email de los empleados que están a cargo de **Alberto Soria**.
 
    ```sql
-   
+   SELECT e.nombre, e.apellido1, e.apellido2, e.email
+   FROM empleado e
+   WHERE e.codigo_jefe = (
+      SELECT codigo_empleado
+      FROM empleado
+      WHERE nombre = 'Alberto' AND apellido1 = 'Soria'
+   );
+
    ```
 
 </details>
