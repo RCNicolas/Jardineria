@@ -503,11 +503,13 @@ AND codigo_empleado_rep_ventas IN (11, 30);
 3. Devuelve el nombre del producto del que se han vendido más unidades. (Tenga en cuenta que tendrá que calcular cuál es el número total de unidades que se han vendido de cada producto a partir de los datos de la tabla `detalle_pedido`)
 
    ```sql
-   SELECT 
-   p.nombre AS Nombre
+   SELECT p.nombre
    FROM producto p
-   JOIN detalle_pedipo dp ON p.codigo_productp = dp.codigo_producto
-
+   JOIN detalle_pedido dp ON p.codigo_producto = dp.codigo_producto
+   GROUP BY p.nombre
+   ORDER BY SUM(dp.cantidad) DESC
+   LIMIT 1;
+   
    ```
 
 4. Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado. (Sin utilizar `INNER JOIN`).
@@ -526,7 +528,7 @@ AND codigo_empleado_rep_ventas IN (11, 30);
 5. Devuelve el producto que más unidades tiene en stock.
 
    ```sql
-   SELECT *
+   SELECT nombre, cantidad_en_stock
    FROM producto
    WHERE cantidad_en_stock = (
       SELECT MAX(cantidad_en_stock)
