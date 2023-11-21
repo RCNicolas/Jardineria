@@ -1,10 +1,7 @@
 ## Consultas multitabla (Composición interna)
 
-Resuelva todas las consultas utilizando la sintaxis de SQL1 y SQL2. Las consultas con sintaxis de SQL2 se deben resolver con INNER JOIN y NATURAL JOIN.
-
 <details> 
 <summary>Consultas Internas</summary>
-
 
 1. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.
 
@@ -133,18 +130,13 @@ Resuelva todas las consultas utilizando la sintaxis de SQL1 y SQL2. Las consulta
     JOIN producto pr ON dp.codigo_producto = pr.codigo_producto
     JOIN gama_producto g ON pr.gama = g.gama
     GROUP BY c.nombre_cliente, g.gama;
-
-    ```
-
+   ```
 </details>
-
 
 ## Consultas multitabla (Composición externa)
 
-Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , NATURAL LEFT JOIN y NATURAL RIGHT JOIN .
 <details> 
 <summary>Consultas Externas</summary>
-
 
 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
    
@@ -156,7 +148,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    LEFT JOIN pago p ON c.codigo_cliente = p.codigo_cliente 
    WHERE p.codigo_cliente IS NULL;
    ```
-
 2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
    
    ```sql
@@ -167,7 +158,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    LEFT JOIN pedido p ON c.codigo_cliente = p.codigo_cliente 
    WHERE p.codigo_cliente IS NULL;
    ```
-
 3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
    
    ```sql
@@ -179,7 +169,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    LEFT JOIN pedido pd ON c.codigo_cliente = pd.codigo_cliente 
    WHERE p.codigo_cliente IS NULL AND pd.codigo_cliente IS NULL;
    ```
-
 4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
    
    ```sql
@@ -189,7 +178,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    LEFT JOIN oficina o ON e.codigo_oficina = o.codigo_oficina 
    WHERE e.codigo_oficina IS NULL;
    ```
-
 5. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
    
    ```sql
@@ -200,7 +188,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas 
    WHERE c.codigo_empleado_rep_ventas IS NULL;
    ```
-
 6. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
    
    ```sql
@@ -215,7 +202,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    INNER JOIN oficina o ON e.codigo_oficina = o.codigo_oficina  
    WHERE c.codigo_empleado_rep_ventas IS NULL ;
    ```
-
 7. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado.
    
    ```sql
@@ -225,7 +211,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas 
    WHERE e.codigo_oficina IS NULL AND c.codigo_empleado_rep_ventas IS NULL;
    ```
-
 8. Devuelve un listado de los productos que nunca han aparecido en un pedido.
    
    ```sql
@@ -236,7 +221,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    LEFT JOIN detalle_pedido d ON p.codigo_producto = d.codigo_producto 
    WHERE d.codigo_producto IS  NULL;
    ```
-
 9. Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto.
    
    ```sql
@@ -250,7 +234,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
    INNER JOIN gama_producto g ON p.gama = g.gama 
    WHERE d.codigo_producto IS  NULL;
    ```
-
 10. Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
     
     ```sql
@@ -271,7 +254,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
     and pr.codigo_producto is not null
     and o.codigo_oficina is not null;
     ```
-
 11. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
     
     ```sql
@@ -283,7 +265,6 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
     LEFT JOIN pago pg ON c.codigo_cliente = pg.codigo_cliente
     WHERE pg.codigo_cliente IS NULL;
     ```
-
 12. Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre de su jefe asociado.
     
     ```sql
@@ -294,16 +275,12 @@ Resuelva todas las consultas utilizando las cláusulas LEFT JOIN, RIGHT JOIN , N
     LEFT JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
     WHERE c.codigo_empleado_rep_ventas IS NULL;
     ```
-
 </details>
-
 
 ## Consultas simples
 
-
 <details> 
 <summary>Consultas Simples</summary>
-
 
 1. Devuelve un listado con el código de oficina y la ciudad donde hay oficinas.
 
@@ -468,11 +445,10 @@ AND codigo_empleado_rep_ventas IN (11, 30);
 
 </details>
 
-
 ## Subconsultas
 
 <details> 
-<summary>Con operadores básicos de comparación</summary>
+<summary>Operadores básicos de comparación</summary>
 
 1. Devuelve el nombre del cliente con mayor límite de crédito.
 
@@ -522,7 +498,6 @@ AND codigo_empleado_rep_ventas IN (11, 30);
       FROM pago
       WHERE pago.codigo_cliente = cliente.codigo_cliente
    );
-
    ```
 
 5. Devuelve el producto que más unidades tiene en stock.
@@ -534,7 +509,6 @@ AND codigo_empleado_rep_ventas IN (11, 30);
       SELECT MAX(cantidad_en_stock)
       FROM producto
    );
-
    ```
 
 6. Devuelve el producto que menos unidades tiene en stock.
@@ -546,7 +520,6 @@ AND codigo_empleado_rep_ventas IN (11, 30);
       SELECT MIN(cantidad_en_stock)
       FROM producto
    );    
-
    ```
 
 7. Devuelve el nombre, los apellidos y el email de los empleados que están a cargo de **Alberto Soria**.
@@ -559,37 +532,194 @@ AND codigo_empleado_rep_ventas IN (11, 30);
       FROM empleado
       WHERE nombre = 'Alberto' AND apellido1 = 'Soria'
    );
+   ```
 
+</details> 
+
+<details>
+
+<summary>ALL y ANY</summary>
+
+1. Devuelve el nombre del cliente con mayor límite de crédito.
+   
+   ```sql
+   SELECT nombre_cliente
+   FROM cliente
+   WHERE limite_credito >= ALL (
+      SELECT limite_credito
+      FROM cliente
+   );
+   ```
+
+2. Devuelve el nombre del producto que tenga el precio de venta más caro.
+   
+   ```sql
+   SELECT nombre
+   FROM producto
+   WHERE precio_venta = (
+      SELECT MAX(precio_venta)
+      FROM producto
+   );  
+   ```
+
+3. Devuelve el producto que menos unidades tiene en stock.
+   
+   ```sql
+   SELECT nombre as Producto
+   FROM producto
+   WHERE cantidad_en_stock = (
+      SELECT MIN(cantidad_en_stock)
+      FROM producto
+   );
+   ```
+</details>
+
+<details>
+
+<summary>IN y NOT IN</summary>
+
+1. Devuelve el nombre, apellido1 y cargo de los empleados que no representen a ningún cliente.
+   
+   ```sql
+   SELECT nombre, apellido1, puesto
+   FROM empleado
+   WHERE codigo_empleado NOT IN (
+      SELECT DISTINCT codigo_empleado_rep_ventas
+      FROM cliente
+      WHERE codigo_empleado_rep_ventas IS NOT NULL
+   );
+   ```
+
+2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+   
+   ```sql
+   SELECT *
+   FROM cliente
+   WHERE codigo_cliente NOT IN (
+      SELECT DISTINCT codigo_cliente
+      FROM pago
+   );  
+   ```
+
+3. Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago.
+   
+   ```sql
+   SELECT *
+   FROM cliente
+   WHERE codigo_cliente IN (
+      SELECT DISTINCT codigo_cliente
+      FROM pago
+   );
+   ```
+
+4. Devuelve un listado de los productos que nunca han aparecido en un pedido.
+   
+   ```sql
+   SELECT *
+   FROM producto
+   WHERE codigo_producto NOT IN (
+      SELECT DISTINCT codigo_producto
+      FROM detalle_pedido
+   );
+   ```
+
+5. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente.
+   
+   ```sql
+   SELECT e.nombre, e.apellido1, e.puesto, o.telefono
+   FROM empleado e
+   JOIN oficina o ON e.codigo_oficina = o.codigo_oficina
+   WHERE e.codigo_empleado NOT IN (
+      SELECT DISTINCT codigo_empleado_rep_ventas
+      FROM cliente
+      WHERE codigo_empleado_rep_ventas IS NOT NULL
+   );  
+   ```
+
+6. Devuelve las oficinas donde **no trabajan** ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama `Frutales`.
+   
+   ```sql
+   SELECT * 
+   FROM oficina
+   WHERE codigo_oficina NOT IN (
+      SELECT DISTINCT e.codigo_oficina
+      FROM empleado e
+      JOIN cliente c ON e.codigo_empleado = c.codigo_empleado_rep_ventas
+      JOIN pedido p ON c.codigo_cliente = p.codigo_cliente
+      JOIN detalle_pedido dp ON p.codigo_pedido = dp.codigo_pedido
+      JOIN producto pr ON dp.codigo_producto = pr.codigo_producto
+      WHERE pr.gama = 'Frutales'
+   );
+   ```
+
+7. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
+   
+   ```SQL
+   SELECT *
+   FROM cliente
+   WHERE codigo_cliente IN (
+      SELECT DISTINCT p.codigo_cliente
+      FROM pedido p
+   ) AND codigo_cliente NOT IN (
+      SELECT DISTINCT codigo_cliente
+      FROM pago
+   );
    ```
 
 </details>
 
+<details>
 
-### Subconsultas con ALL y ANY
-
-1. Devuelve el nombre del cliente con mayor límite de crédito.
-2. Devuelve el nombre del producto que tenga el precio de venta más caro.
-3. Devuelve el producto que menos unidades tiene en stock.
-
-### Subconsultas con IN y NOT IN
-
-1. Devuelve el nombre, apellido1 y cargo de los empleados que no representen a ningún cliente.
-2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
-3. Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago.
-4. Devuelve un listado de los productos que nunca han aparecido en un pedido.
-5. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente.
-6. Devuelve las oficinas donde **no trabajan** ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama `Frutales`.
-7. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
-
-
-
-<!-- <details> 
-<summary><h2>Opciones</h2></summary>
-
-**Subconsultas con EXISTS y NOT EXISTS**
+<summary>EXISTS y NOT EXISTS</summary>
 
 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+
+```sql
+SELECT *
+FROM cliente c
+WHERE EXISTS (
+   SELECT 1
+   FROM pago p
+   WHERE c.codigo_cliente = p.codigo_cliente
+);
+```
+
 2. Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago.
+
+```SQL
+SELECT *
+   FROM cliente c
+   WHERE EXISTS (
+      SELECT 1
+      FROM pago p
+      WHERE c.codigo_cliente = p.codigo_cliente
+);
+```
+
 3. Devuelve un listado de los productos que nunca han aparecido en un pedido.
 
-</details> -->
+```SQL
+SELECT *
+FROM producto pr
+WHERE NOT EXISTS (
+      SELECT 1
+      FROM detalle_pedido dp
+      WHERE pr.codigo_producto = dp.codigo_producto
+);
+```
+
+4. Devuelve un listado de los productos que han aparecido en un pedido alguna vez.
+
+```SQL
+SELECT *
+   FROM producto pr
+   WHERE EXISTS (
+      SELECT 1
+      FROM detalle_pedido dp
+      WHERE pr.codigo_producto = dp.codigo_producto
+);
+```
+</details>
+
+## Tips en consultas
+
