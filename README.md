@@ -876,7 +876,7 @@ SELECT *
       select codigo_cliente, nombre_cliente
       from cliente
       where codigo_cliente not in (1, 2, 4, 8, 9);
-```
+   ```
 
 2. subconsulta
    ```SQL
