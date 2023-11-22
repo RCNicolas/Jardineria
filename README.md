@@ -760,13 +760,19 @@ SELECT *
    where p.codigo_producto = dp.codigo_producto) AS Pedidos_pro_producto
    from producto p;
    ```
-5.
+5. Consulta sobre consulta
+```SQL
+    select nombre, Total from
+        (select e.nombre, count(e.codigo_empleado) as Total
+        from cliente c
+        join empleado e on c.codigo_empleado_rep_ventas = e.codigo_empleado
+        group by e.nombre) as tabla 
+    where tabla.Total > 3;
+```
 
 </details>
 
 </details>
-
-## Tips en consultas
 
 <details>
 <summary>5 Tips UPDATE</summary>
@@ -808,15 +814,112 @@ SELECT *
 
 </details>
 
+<details>
+<summary> 5 Tips Group By </summary>
 
+1. Utilizacion de group Basica
+   ```SQL
+      select c.pais, count(*) as Numero_clientes
+      from cliente c
+      join pago p on p.codigo_cliente = c.codigo_cliente
+      group by  c.pais;
+   ```
 
+2. Filtrar los paises que empiecen con una letra y utilizacion de HAVING
+   ```SQL
+      select c.pais, count(*) as Total
+      from cliente c
+      where substring(c.pais, 1, 1) = 'u' 
+      group by c.pais
+      having count(*) > 2;
+   ``` 
 
+3. Cuenta cuantos paises empiezan por cada letra hay en cada letra 
+   ```SQL
+      select substring(c.pais, 1, 1) as Primeraletra, count(*) as Total
+      from cliente c
+      group by c.pais;
+   ```
 
+4. une 2 tablas y las agrupa contando el total de cada una
 
+   ```SQL
 
+      select Columna, count(*) as Total 
+      from
+         (select p.forma_pago as Columna 
+         from cliente c
+         join pago p on p.codigo_cliente = c.codigo_cliente
+         union all
+         select c.pais As Columna 
+         from cliente c) as mitabla
+      group by Columna ;
+   ```
 
+5. Concatenar resultados de agrupamiento
+   ```SQL
+      select
+      p.forma_pago, 
+      GROUP_CONCAT(c.pais order by c.pais desc SEPARATOR ', ') as pais
+      from cliente c
+      JOIN pago p on p.codigo_cliente = c.codigo_cliente
+      GROUP by p.forma_pago;
+   ```
+</details>
 
+<details>
 
+<summary>5 Tips Where </summary>
+
+1. Not in, cuando queremos que no muestre los codigos que le ponemos 
+   ```SQL
+      select codigo_cliente, nombre_cliente
+      from cliente
+      where codigo_cliente not in (1, 2, 4, 8, 9);
+```
+
+2. subconsulta
+   ```SQL
+      select * 
+      from oficina o
+      where (
+         select count(*)
+         from empleado e
+         where e.codigo_oficina = o.codigo_oficina
+      )>4;
+   ```
+
+3.  Editar obteniendo el valor por subconsulta
+   ```SQL 
+
+      select nombre_cliente 
+      from cliente 
+      where nombre_cliente REGEXP '[aieo]$';
+   ```
+
+4. Regex
+   ```SQL
+
+      select * 
+      from pago where (
+               select pais 
+               from cliente 
+               where cliente.codigo_cliente  = pago.codigo_cliente ) 
+      <> 'France';
+   ```
+
+5. In y subconsulta
+   ```SQL
+      select nombre_cliente 
+      from cliente
+      where codigo_empleado_rep_ventas IN (
+         select codigo_empleado 
+         from empleado 
+         where apellido1 LIKE 'b%'
+      );
+   ```
+
+</details>
 
 
 
